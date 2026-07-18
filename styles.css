@@ -345,7 +345,7 @@ h1 em {
 }
 
 .image-placeholder::after {
-  content: "Replace with Blush photo";
+  content: "";
   position: absolute;
   right: 14px;
   bottom: 12px;

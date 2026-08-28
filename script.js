@@ -5,37 +5,86 @@ const navLinks = nav.querySelectorAll('a');
 const year = document.querySelector('#year');
 const form = document.querySelector('.inquiry-form');
 
-if (year) year.textContent = new Date().getFullYear();
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
 
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 30);
 });
 
 menuButton.addEventListener('click', () => {
-  const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-  menuButton.setAttribute('aria-expanded', String(!isOpen));
+  const isOpen =
+    menuButton.getAttribute('aria-expanded') === 'true';
+
+  menuButton.setAttribute(
+    'aria-expanded',
+    String(!isOpen)
+  );
+
   nav.classList.toggle('open', !isOpen);
-  document.body.classList.toggle('menu-open', !isOpen);
+
+  document.body.classList.toggle(
+    'menu-open',
+    !isOpen
+  );
 });
 
-navLinks.forEach(link => link.addEventListener('click', () => {
-  menuButton.setAttribute('aria-expanded', 'false');
-  nav.classList.remove('open');
-  document.body.classList.remove('menu-open');
-}));
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+    menuButton.setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    nav.classList.remove('open');
+
+    document.body.classList.remove(
+      'menu-open'
+    );
+
   });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  alert("The inquiry form is ready visually. Connect the client's email or preferred form service to activate delivery.");
 });
+
+const observer = new IntersectionObserver(
+  entries => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        entry.target.classList.add(
+          'visible'
+        );
+
+        observer.unobserve(
+          entry.target
+        );
+
+      }
+
+    });
+
+  },
+  {
+    threshold: 0.12
+  }
+);
+
+document
+  .querySelectorAll('.reveal')
+  .forEach(el => observer.observe(el));
+
+form.addEventListener(
+  'submit',
+  event => {
+
+    event.preventDefault();
+
+    alert(
+      "The inquiry form is ready visually. Connect the client's email or preferred form service to activate delivery."
+    );
+
+  }
+);
